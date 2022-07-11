@@ -17,8 +17,10 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
  * Router Setup
  * --------------------------------------------------------------------
  */
-$routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+// $routes->setDefaultNamespace('App\Controllers');
+// $routes->setDefaultController('Home');
+$routes->setDefaultNamespace('App\Modules\Auth\Controllers');
+$routes->setDefaultController('Auth');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -32,7 +34,7 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+// $routes->get('/', 'Home::index');
 
 /*
  * --------------------------------------------------------------------
@@ -50,4 +52,23 @@ $routes->get('/', 'Home::index');
 if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
 {
 	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+}
+
+//hmvc routing
+$modules_path = APPPATH . 'Modules/';
+$modules = scandir($modules_path);
+
+foreach ($modules as $module) {
+	if ($module === '.' || $module === '..') {
+		continue;
+	}
+
+	if (is_dir($modules_path) . '/' . $module) {
+		$routes_path = $modules_path . $module . '/Config/Routes.php';
+		if (file_exists($routes_path)) {
+			require $routes_path;
+		} else {
+			continue;
+		}
+	}
 }

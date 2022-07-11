@@ -32,10 +32,14 @@ class Database extends Config
 	 */
 	public $default = [
 		'DSN'      => '',
-		'hostname' => 'localhost',
-		'username' => '',
-		'password' => '',
-		'database' => '',
+		// 'hostname' => 'localhost',
+		'hostname' => '192.168.10.81',
+		// 'username' => '',
+		'username' => 'manager',
+		// 'password' => '',
+		'password' => 'Intimates@2020',
+		// 'database' => '',
+		'database' => 'giga-ms',
 		'DBDriver' => 'MySQLi',
 		'DBPrefix' => '',
 		'pConnect' => false,
