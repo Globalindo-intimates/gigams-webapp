@@ -34,7 +34,7 @@ class Database extends Config
 		'DSN'      => '',
 		// 'hostname' => 'localhost',
 		'hostname' => '192.168.10.81',
-		// 'username' => '',
+		// 'username' => 'root',
 		'username' => 'manager',
 		// 'password' => '',
 		'password' => 'Intimates@2020',
