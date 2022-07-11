@@ -1,4 +1,4 @@
-<?= $this->extend('layouts\page_layout'); ?>
+<?= $this->extend('layouts/page_layout'); ?>
 <?= $this->section('content'); ?>
     <!-- DataTables -->
     <link rel="stylesheet" href="<?= base_url('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
