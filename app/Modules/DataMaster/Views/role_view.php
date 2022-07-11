@@ -4,16 +4,31 @@
     <link rel="stylesheet" href="<?= base_url('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('plugins/datatables-responsive/css/responsive.bootstrap4.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('plugins/datatables-buttons/css/buttons.bootstrap4.min.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('plugins/datatables-select/css/select.bootstrap4.min.css'); ?>">
+    <!-- <link rel="stylesheet" href="<//?= base_url('plugins/jquery-datatables-checkboxes/css/dataTables.checkboxes.css'); ?>"> -->
 
-        <!-- SweetAlert2 -->
-        <link rel="stylesheet" href="<?= base_url('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css'); ?>">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="<?= base_url('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css'); ?>">
+    <style>
+    td.details-control {
+        background: url(<?= base_url('images/details_open.png'); ?>) no-repeat center center;
+        cursor: pointer;
+        width: 30px;
+        transition: .5s;
+    }        
+    tr.shown td.details-control {
+        background: url(<?= base_url('images/details_close.png'); ?>) no-repeat center center;
+        width: 30px;
+        transition: .5s;
+    }    
+    </style>
 
     <div class="container h-100">
         <div class="row h-100 justify-content-center align-items-center">
             <div class="col-md-8">
                 <div class="card card-info shadow">
                     <div class="card-header">
-                        <h3 class="card-title">Data Master Menu</h3>
+                        <h3 class="card-title">Data Master Role</h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                 <i class="fas fa-minus"></i>
@@ -21,23 +36,19 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <table id="tableMenu" class="table table-bordered table-striped">
+                        <table class="table table-striped table-bordered" id="tableRole">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Menu</th>
-                                    <th>Alias</th>
-                                    <th>Icon</th>
                                     <th></th>
+                                    <th>ID</th>
+                                    <th>Bagian</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Menu</th>
-                                    <th>Alias</th>
-                                    <th>Icon</th>
                                     <th></th>
+                                    <th>ID</th>
+                                    <th>Bagian</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -47,38 +58,48 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalMenu" role="dialog">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content bg-success">
+    <div class="modal fade" id="modalRole" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-Info">
                 <div class="modal-header">
-                    <h4 class="modal-title">Data Menu</h4>
+                    <h4 class="modal-title">Data Module Role</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times</span>
                     </button>
                     <div class="ribbon-wrapper">
-                        <div class="ribbon bg-warning" id="theRibbon">
+                        <div class="ribbon bg-warning" id="theRibbon1">
                         </div>
                     </div>
                 </div>
-                <form id="formMenu" name="formMenu">
+                <form id="formRole" name="formRole">
                     <input type="hidden" id="id">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="menu">Menu:</label>
-                            <input type="text" id="module" name="module" class="form-control">
+                            <label for="module">Module:</label>
+                            <select id="module" name="module" class="form-control"></select>
                         </div>
-                        <div class="form-group">
-                            <label for="menu">Alias:</label>
-                            <input type="text" id="alias" name="alias" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="menu">Icon:</label>
-                            <input type="text" id="icon" name="icon" class="form-control">
-                        </div>
+                        <table class="table table-bordered table-striped" id="tableAppDetail">
+                            <thead>
+                                <tr>
+                                    <!-- <th></th> -->
+                                    <th>ID</th>
+                                    <th>Route</th>
+                                    <th>Caption</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <!-- <th></th> -->
+                                    <th>ID</th>
+                                    <th>Route</th>
+                                    <th>Caption</th>
+                                </tr>                                
+                            </tfoot>
+                        </table>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" id="btnSaveMenu" class="btn btn-info"><i class="fa fa-upload"></i>&nbsp;Save</button>
-                        <button type="button" id="btnCancelMenu" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i>&nbsp;Cancel</button>
+                        <button type="submit" id="btnSaveApp" class="btn btn-info"><i class="fa fa-upload"></i>&nbsp;Save</button>
+                        <button type="button" id="btnCancelApp" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i>&nbsp;Cancel</button>
                     </div>
                 </form>
             </div>
@@ -98,6 +119,8 @@
     <script src="<?= base_url('plugins/datatables-buttons/js/buttons.html5.min.js'); ?>"></script>
     <script src="<?= base_url('plugins/datatables-buttons/js/buttons.print.min.js'); ?>"></script>
     <script src="<?= base_url('plugins/datatables-buttons/js/buttons.colVis.min.js'); ?>"></script>
+    <script src="<?= base_url('plugins/datatables-select/js/dataTables.select.min.js'); ?>"></script>
+    <!-- <script src="<//?= base_url('plugins/jquery-datatables-checkboxes/js/dataTables.checkboxes.min.js'); ?>"></script> -->
 
     <!-- Jquery validation -->
     <script src="<?= base_url('plugins/jquery-validation/jquery.validate.min.js'); ?>"></script>
@@ -112,73 +135,112 @@
             position: 'center',
             showConfirmButton: true,
         });
-        $.fn.dataTable.ext.errMode = 'none';
+        var childTable;
+        var rowData;    
+        var tableAppDetail;
+        // $.fn.dataTable.ext.errMode = 'none';
+        // .on('error.dt', function(e, settings,techNote, message){
+        //     window.open('<?= base_url("auth/getAuth"); ?>', '_self')
+        // })
 
-        const tableMenu = $('#tableMenu').on('error.dt', function(e, settings,techNote, message){
-            console.log(message);
-            window.open('<?= base_url("auth/getAuth"); ?>', '_self')
-        }).DataTable({
-            // "dom": 'rf<"toolbar">tip',
-            // dom: 'flrB<"toolbar">tip',
-            "dom": 'lrfBtip',
-            "buttons": [
-                {
-                    text: 'Add New',
-                    action: function(e, dt, node, config){
-                        $('#theRibbon').text('Add New');
-                        clearControls();
-                        $('#modalMenu').modal('show');                        
-                    }
-                }
-            ],
-            "paging": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true, 
-            "ajax": {
-                url: '<?= base_url("MasterData/daftarMenu") ;?>',
+        const tableRole = $('#tableRole').DataTable({
+            ajax:{
                 type: 'GET',
-                dataType: 'json',
+                url: '<?= base_url("MasterData/daftarBagian"); ?>',
+                dataType: 'json'
             },
-            "columns": [
-                {'data': 'id'},
-                {'data': 'module'},
-                {'data': 'alias'},
-                {'data': 'icon'},
-                {'data': null},
-            ],
-            "columnDefs": [
+            columns: [
                 {
-                    "targets": [0],
-                    "visible": false
+                    className: 'details-control',
+                    data: null,
+                    defaultContent: ''
                 },
-                {
-                    "targets": [4],
-                    "render": function(data, type, row, meta) {
-							return '<button class="btn btn-success btn-sm mx-1 btnEditMenu"><i class="fas fa-edit"></i>Edit</button>' +
-								'<button class="btn btn-danger btn-sm mx-1 btnDeleteMenu"><i class="fas fa-trash"></i>Delete</button>';  
-                    }                  
-                }
+                {data: 'id'},
+                {data: 'bagian'},
             ],
-
+            columnDefs: [
+                {
+                    targets: [1],
+                    visible: false
+                },
+            ]
         });
 
-        $('div.toolbar').html('<button id="btnAddNewMenu" class="btn btn-warning btn-sm"><i class="fas fa-plus"></i>Add New</button>');
+        $('#tableRole tbody').on('click', 'td.details-control', function(){
+            let tr = $(this).closest('tr');
+            let row = tableRole.row(tr);
+            rowData = row.data();
 
-        $('#tableMenu tbody').on('click', 'button.btnEditMenu', function() {
-            let selectedRow = tableMenu.row($(this).parents('tr')).data();
+            if(row.child.isShown()){
+                row.child.hide();
+                tr.removeClass('shown');
+                $('#cT' + rowData.clientID).DataTable().destroy();
+            }else{
+                row.child(format(rowData)).show();
+                let id = rowData.id;
+
+                childTable = $(`#cT${id}`). DataTable({
+                    "dom": 'lrfBtip',
+                    "buttons": [
+                        {
+                            text: 'Add New Role',
+                            action: function(e, dt, node, config){
+                                $('#theRibbon1').text('Add New');
+                                clearRoleControls();
+                                $('#module').append($('<option>', {
+                                    value: "",
+                                    text: "--Pilih Module--"
+                                }));
+                                $.ajax({
+                                    type: 'GET',
+                                    url: '<?= base_url("MasterData/daftarMenu"); ?>',
+                                    dataType: 'json'
+                                }).done(function(retData){
+                                    console.log('retData: ', retData);
+                                    $.each(retData.data, function(i, item){
+                                        $('#module').append($('<option>', {
+                                            value: item.id,
+                                            text: item.module
+                                        }));                                        
+                                    })                                    
+                                })
+                                $('#modalRole').modal('show');                        
+                            }
+                        }
+                    ],
+                    ajax: {
+                        type: 'GET',
+                        url: '<?= base_url("MasterData/role/getRole"); ?>/' + rowData.id,
+                        dataType: 'json'
+                    },
+                    columns: [
+                        {data: 'id'},
+                        {data: 'module'},
+                        {data: 'route'},
+                        {data: 'caption'},
+                        {data: null},
+                    ],
+                    columnDefs: [
+                        {
+                            targets: [0],
+                            visible: false
+                        },
+                        {
+                            targets: [4],
+                            render: function(data, type, row, meta){
+                                return `<button class="btn btn-danger btn-sm btnDeleteRole"><i class="fas fa-Trash"></i> Hapus</button>`;
+                            }
+                        }                        
+                    ]
+                });
+                tr.addClass('shown');
+            }
+        });
+
+        $('#tableRole tbody').on('click', 'button.btnDeleteRole', function(){
+            let selectedRow = childTable.row($(this).parents('tr')).data();
             console.log('selectedRow: ', selectedRow);
-            $('#id').val(selectedRow.id);
-            $('#module').val(selectedRow.module);
-            $('#alias').val(selectedRow.alias);
-            $('#icon').val(selectedRow.icon);
-            $('#theRibbon').text('Edit');
-            $('#modalMenu').modal('show');
-		});
-
-        $('#tableMenu tbody').on('click', 'button.btnDeleteMenu', function() {
-            let selectedRow = tableMenu.row($(this).parents('tr')).data();
+            console.log(rowData.id);
 
             const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -198,10 +260,16 @@
                 reverseButtons: true
             }).then((result) => {
             if (result.isConfirmed) {
+                let deleteParams = {
+                    'id_bagian': rowData.id,
+                    'id_module_detail': selectedRow.id
+                };
+
                 $.ajax({
-                    type: 'DELETE',
-                    url: '<?= base_url("MasterData/menu/delete"); ?>/' + selectedRow.id,
-                    dataType: 'json'
+                    type: 'POST',
+                    url: '<?= base_url("MasterData/role/delete"); ?>',
+                    data: {data: deleteParams},
+                    dataType: 'json',
                 }).done(function(dtReturn){
                     if(dtReturn.status == 200){
                         swalWithBootstrapButtons.fire(
@@ -223,83 +291,108 @@
                 )
             }
             })            
-		});        
-        
-        $('form[id="formMenu"]').validate({
+        })
+
+        function format(rD){
+            var childTable = `<table class="table table-striped table-bordered no-wrap" id="cT${rD.id}" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Module</th>
+                                        <th>Route</th>
+                                        <th>Caption</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                             </table>`;
+            return $(childTable).toArray();
+        }
+
+        function clearRoleControls(){
+            $('#id').val('');
+            $('#tableAppDetail').empty();
+            $('#module').empty('');
+        }
+
+        $('form[id="formRole"]').validate({
             rules: {
                 module: {
-                    'required': true
-                },
-                alias: {
-                    'required': true
-                },
-                icon: {
                     'required': true
                 },
             },
             errorClass: 'error fail-alert',
             validClass: 'valid success-alert',
             messages: {
-                module: {
-                    required: 'Menu harus diisi!'
-                },
-                alias: {
-                    required: 'Alias harus diisi!'
-                },
-                icon: {
-                    required: 'Icon harus diisi!'
+                route: {
+                    required: 'Route harus diisi!'
                 },
             },
             submitHandler: function(form, e) {
                 e.preventDefault();
 
-                let data = $(form).serialize();
-
-                const url = $('#theRibbon').text() == 'Add New' ? '<?= base_url("MasterData/menu/create"); ?>' : '<?= base_url("MasterData/menu/update"); ?>/' + $('#id').val();
-                const method = $('#theRibbon').text() == 'Add New' ? 'POST' : 'PUT';
+                let selectedRows = tableAppDetail.rows('.selected').data();
+                let rowsData = [];
+                $.each(selectedRows, function(i, item){
+                    rowsData.push(
+                        {
+                            'id_bagian': rowData.id,
+                            'id_module_detail': item.id
+                        }
+                    )
+                });
+                const url = '<?= base_url("MasterData/role/create"); ?>';
 
                 $.ajax({
-                    type: method,
+                    type: 'POST',
                     url: url,
-                    data: data,
+                    data: {data: rowsData},
                     dataType: 'json'
                 }).done(function(returnData) {
                     console.log('returnData: ', returnData);
-                    if(returnData.status == 400){
-                        Toast.fire({
-                            icon: 'warning',
-                            title: returnData.message
-                        });
-                    }else{
+                    if(returnData > 0){
                         Toast.fire({
                             icon: 'success',
-                            title: 'Data Menu berhasil disimpan.',
+                            title: 'Data Role berhasil disimpan.',
                             didClose: () => {
-                                $('#module').focus();
-                                $('#theRibbon').text() == 'Edit' ? $('#modalMenu').modal('hide') : clearControls();
                                 loadTable();
                             }
-                        });                            
+                        });                        
                     }
                 })
-            }
+            }            
         });
 
-        $('#module').blur(function(){
-            let moduleVal = $(this).val().toString();
-            let newVal = moduleVal.replace(" ","");
-            $('#module').val(newVal);
-        })
-        
+        $('#module').change(function(){
+            let idModule = $(this).val();
+
+            tableAppDetail = $('#tableAppDetail').DataTable({
+                destroy: true,
+                ajax:{
+                    type: 'GET',
+                    url: '<?= base_url("MasterData/role/getAppDetail"); ?>/' + idModule,
+                    dataType: 'json'
+                },
+                columns: [
+                    // {data: null},
+                    {data: 'id'},
+                    {data: 'route'},
+                    {data: 'caption'},
+                ],
+                columnDefs: [
+                    {
+                        targets: [0],
+                        visible: false,
+                    },  
+                ],
+                select: {
+                    style: 'multi',
+                }
+            });
+        });
+
         function loadTable(){
-            tableMenu.ajax.reload();
+            tableRole.ajax.reload();
         }
 
-        function clearControls(){
-            $('#id').val('');
-            $('#module').val('');
-            $('#alias').val('');
-            $('#icon').val('');
-        }
     </script>
 <?= $this->endSection(); ?>
