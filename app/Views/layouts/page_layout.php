@@ -22,7 +22,7 @@
         <?= $this->include('layouts/navbar'); ?>
 
         <!-- <//?= $this->include('Modules\Dashboard\Views\layout\sidebar'); ?> -->
-        <?= view_cell('/App/LibrariesSidebarLibrary::loadMenus'); ?>
+        <?= view_cell('/App/Libraries/SidebarLibrary::loadMenus'); ?>
 
         <div class="content-wrapper">
             <div class="content-header">
