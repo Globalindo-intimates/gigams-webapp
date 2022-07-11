@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GIGA-MS</title>
 
-    <?= $this->include('layouts\css'); ?>
-    <?= $this->include('layouts\js'); ?>
+    <?= $this->include('layouts/css'); ?>
+    <?= $this->include('layouts/js'); ?>
 
 </head>
 
@@ -19,10 +19,10 @@
             <img class="animation__wobble" src="<?= base_url('dist/img/AdminLTELogo.png'); ?>" alt="AdminLTELogo" height="60" width="60">
         </div>
         
-        <?= $this->include('layouts\navbar'); ?>
+        <?= $this->include('layouts/navbar'); ?>
 
         <!-- <//?= $this->include('Modules\Dashboard\Views\layout\sidebar'); ?> -->
-        <?= view_cell('\App\Libraries\SidebarLibrary::loadMenus'); ?>
+        <?= view_cell('/App/LibrariesSidebarLibrary::loadMenus'); ?>
 
         <div class="content-wrapper">
             <div class="content-header">
@@ -32,7 +32,7 @@
                         <h1 class="m-0">Dashboard v2</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
-                        <?= $this->include('layouts\breadcrumb'); ?>
+                        <?= $this->include('layouts/breadcrumb'); ?>
                     </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
@@ -49,7 +49,7 @@
             </section>
         </div>
 
-        <?= $this->include('layouts\footer'); ?>
+        <?= $this->include('layouts/footer'); ?>
     </div>
 
     
