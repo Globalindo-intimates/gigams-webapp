@@ -66,7 +66,9 @@ class Filters extends BaseConfig
                 'dashboard/*',
                 'dashboard',
                 'DataMaster/*',
-                'DataMaster'
+                'DataMaster',
+				'User/*',
+				'User'
             ]
         ]		
 	];

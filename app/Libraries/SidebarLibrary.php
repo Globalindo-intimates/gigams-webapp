@@ -16,6 +16,7 @@ class SidebarLibrary{
             foreach($response['data'] as $element){
                 $data['menus']['user_name'] = $element['user_name'];
                 $data['menus']['nama_lengkap'] = $element['nama_lengkap'];
+                $data['menus']['image_url'] = $element['image_url'];
                 // $data[$element['module']][] = $element;
                 $data['menus']['module'][$element['module']][] = $element;
             }

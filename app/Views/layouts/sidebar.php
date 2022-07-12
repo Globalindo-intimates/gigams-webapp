@@ -14,11 +14,17 @@
             <//?= $menu['module']; ?>
         <//?php endforeach; ?>     -->
         <div class="image">
-          <img src="<?= base_url('dist/img/user2-160x160.jpg'); ?>" class="img-circle elevation-2" alt="User Image">
+          <!-- <img src="<//?= base_url('dist/img/user2-160x160.jpg'); ?>" class="img-circle elevation-2" alt="User Image"> -->
+          <?php
+            $imageUrl = ($menus['image_url'] != null ? base_url('images/users/' . $menus['image_url']) : base_url('images/users/placeholder300.png')); 
+            // var_dump($imageUrl);
+            // exit()
+          ?>
+          <img src="<?= $imageUrl; ?>" class="img-circle elevation-2" alt="User Image">
         </div>
         
         <div class="info">
-            <a href="#" class="d-block"><?= $menus['nama_lengkap']; ?></a>
+            <a href="<?= base_url('user/userProfile') ;?>" class="d-block"><?= $menus['nama_lengkap']; ?></a>
         </div>
       </div>
 

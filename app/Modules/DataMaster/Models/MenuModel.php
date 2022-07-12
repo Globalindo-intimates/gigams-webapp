@@ -10,7 +10,7 @@ class MenuModel extends Model{
     function getApps($karyawanId){
         $builder = $this->table('user_ga');
         $builder->select('karyawan_ga.nama_lengkap, user_ga.user_name, 
-                          module_ga.module, module_detail.route, 
+                          module_ga.module, module_detail.route, karyawan_ga.image_url,
                           module_detail.caption, module_ga.icon');
 
         $builder->join('karyawan_ga', 'user_ga.karyawan_id = karyawan_ga.id');

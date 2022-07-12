@@ -46,6 +46,7 @@ class Autoload extends AutoloadConfig
         'Modules\Auth' => APPPATH . 'Modules/Auth',
         'Modules\Dashboard' => APPPATH . 'Modules/Dashboard',
         'Modules\DataMaster' => APPPATH . 'Modules/DataMaster',		
+        'Modules\User' => APPPATH . 'Modules/User',		
 	];
 
 	/**
